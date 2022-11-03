@@ -1,0 +1,2 @@
+1.新建项目 nest new 名称 
+2.新建 crud nest g resource 模块名称
