@@ -1,6 +1,5 @@
 TEST_VALUE:
   name: "dev_cookie"
-
 FEISHU_CONFIG:
   FEISHU_URL: https://open.feishu.cn/open-apis
   FEISHU_API_HOST: https://open.feishu.cn
