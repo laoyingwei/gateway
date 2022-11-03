@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { BusinessException } from 'src/common/exceptions/business.exception';
 import { ConfigService } from '@nestjs/config';
-
+import { getAppToken } from '../helper/auth'
 @Controller('user')
 export class UserController {
   constructor(
@@ -19,11 +19,14 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  // @Get()
-  // @Version([VERSION_NEUTRAL, '1'])
-  // findAll() {
-  //   return this.userService.findAll();
-  // }
+  @Get()
+  @Version([VERSION_NEUTRAL, '1'])
+  async findAll() {
+    const data =  await getAppToken();
+
+    debugger
+    return data
+  }
   @Get('findError')
   @Version([VERSION_NEUTRAL, '1'])
   findError() {

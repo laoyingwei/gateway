@@ -6,7 +6,8 @@ const { FEISHU_CONFIG: { FEISHU_URL } } = getConfig()
 /**
  * @description: 任意请求
  */
-const request = async ({ url, option = {} }) => {
+ 
+export const request = async ({ url, option = {} }) => {
   try {
     return axios.request({
       url,
@@ -33,13 +34,14 @@ export interface IRequest {
 /**
  * @description: 带 version 的通用 api 请求
  */
-const methodV = async ({
+export const methodV = async ({
   url,
   method,
-  headers,
+  headers = {},
   params = {},
   query = {},
 }: IMethodV): Promise<IRequest> => {
+
   let sendUrl = '';
   if (/^(http:\/\/|https:\/\/)/.test(url)) {
     sendUrl = url;
@@ -47,7 +49,9 @@ const methodV = async ({
     sendUrl = `${FEISHU_URL}${url}`;
   }
   try {
+    debugger
     return new Promise((resolve, reject) => {
+      debugger
       axios({
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
@@ -61,15 +65,18 @@ const methodV = async ({
         },
       })
         .then(({ data, status }) => {
+          debugger
           resolve({ data, code: status });
         })
         .catch((error) => {
+          debugger
           reject(error);
         });
+      // resolve({ data:{}, code: 200 });
     });
   } catch (error) {
+    debugger
     throw error;
   }
 };
 
-export { request, methodV };
